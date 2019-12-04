@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 /**
  * RecyclerView 构建者
- * @author zihuan
+ * @author Zihuan
  */
 class ZRecyclerBuilder {
 

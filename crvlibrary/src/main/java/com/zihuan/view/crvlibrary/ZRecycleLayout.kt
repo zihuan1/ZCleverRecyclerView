@@ -4,6 +4,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+
+/**
+ * RecyclerView 扩展类
+ * @author Zihuan
+ */
+
 val RECYCLER_VERTICAL = LinearLayoutManager.VERTICAL
 val RECYCLER_HORIZONTAL = LinearLayoutManager.HORIZONTAL
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Zihuan
  */
 class ZCleverRecyclerView : FrameLayout {
-    
+
     private lateinit var mZWrapRecyclerView: ZWrapRecyclerView
 
     constructor(context: Context) : super(context) {
