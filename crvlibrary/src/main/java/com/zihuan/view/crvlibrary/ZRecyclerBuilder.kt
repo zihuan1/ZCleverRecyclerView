@@ -31,6 +31,13 @@ class ZRecyclerBuilder {
         mZRecyclerData.update(list)
     }
 
+    /**
+     *设置自定义的LayoutManager
+     */
+    fun setLayoutManager(layoutManager: RecyclerView.LayoutManager) {
+        mRecyclerView.layoutManager = layoutManager
+    }
+
     fun <T : RecyclerView.LayoutManager> getLayoutManager() = mRecyclerView.layoutManager as T
 
     /**
