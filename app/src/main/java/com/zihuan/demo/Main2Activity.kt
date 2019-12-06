@@ -2,7 +2,7 @@ package com.zihuan.demo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.zihuan.view.crvlibrary.ZWrapRecyclerView
+import com.zihuan.view.crvlibrary.ZRecyclerWrapRecyclerView
 import kotlinx.android.synthetic.main.activity_main2.*
 
 class Main2Activity : AppCompatActivity() {
@@ -14,8 +14,10 @@ class Main2Activity : AppCompatActivity() {
         (0..100).forEach {
             list.add("$it")
         }
-        var builder = ZWrapRecyclerView(re_view2)
-        builder.buildVerticalLayout(ReAdapter()).setData(list)
-        builder.getBuilder()
+//        var builder = ZRecyclerWrapRecyclerView(re_view2)
+//        builder.buildVerticalLayout(ReAdapter()).setData(list)
+//        builder.getBuilder()
+        var builder = ZRecyclerWrapRecyclerView(re_view2).buildVerticalLayout(ReAdapter())
+        builder.setData(list)
     }
 }

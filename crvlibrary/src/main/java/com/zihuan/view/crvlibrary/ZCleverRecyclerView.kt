@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class ZCleverRecyclerView : FrameLayout {
 
-    private lateinit var mZWrapRecyclerView: ZWrapRecyclerView
+    private lateinit var mZWrapRecyclerView: ZRecyclerWrapRecyclerView
+    private lateinit var mRecyclerBuilderZ: ZBaseRecyclerBuilder
 
     constructor(context: Context) : super(context) {
         createView()
@@ -28,17 +29,25 @@ class ZCleverRecyclerView : FrameLayout {
     private fun createView() {
         var recyclerView = RecyclerView(context)
         addView(recyclerView)
-        mZWrapRecyclerView = ZWrapRecyclerView(recyclerView)
+        mZWrapRecyclerView = ZRecyclerWrapRecyclerView(recyclerView)
     }
 
-    fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>) = mZWrapRecyclerView.buildVerticalLayout(adapter)
+    fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>) = mZWrapRecyclerView.buildVerticalLayout(adapter).apply {
+        mRecyclerBuilderZ = this
+    }
 
-    fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>) = mZWrapRecyclerView.buildHorizontalLayout(adapter)
+    fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>) = mZWrapRecyclerView.buildHorizontalLayout(adapter).apply {
+        mRecyclerBuilderZ = this
+    }
 
-    fun buildGridLayout(adapter: RecyclerView.Adapter<*>, type: Int) = mZWrapRecyclerView.buildGridLayout(adapter, type)
+    fun buildGridLayout(adapter: RecyclerView.Adapter<*>, type: Int) = mZWrapRecyclerView.buildGridLayout(adapter, type).apply {
+        mRecyclerBuilderZ = this
+    }
 
-    fun getRecyclerView() = mZWrapRecyclerView.getRecyclerView()
-
-    fun getBuilder() = mZWrapRecyclerView.getBuilder()
+    /**
+     * 为了便于调用(懒),暴露出当前构建者
+     * 获取当前构建者之前,一定要调用buildVerticalLayout等方法进行创建
+     */
+    fun getBuilder() = mRecyclerBuilderZ
 
 }

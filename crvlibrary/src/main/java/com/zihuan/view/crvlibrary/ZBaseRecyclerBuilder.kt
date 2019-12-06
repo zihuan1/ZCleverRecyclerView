@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * RecyclerView 构建者
+ * RecyclerView 构建者类
  * @author Zihuan
  */
-class ZRecyclerBuilder {
+class ZBaseRecyclerBuilder {
 
     private var mRecyclerView: RecyclerView
     private var mZRecyclerData: ZRecyclerData
@@ -44,7 +44,7 @@ class ZRecyclerBuilder {
      * 设置分割线
      */
     fun setDivider(rvd: RecyclerView.ItemDecoration) =
-        apply { mRecyclerView.addItemDecoration(rvd) }
+            apply { mRecyclerView.addItemDecoration(rvd) }
 
     /**
      * 滚动到底部
@@ -64,14 +64,19 @@ class ZRecyclerBuilder {
     }
 
     /**
+     * 获取获取当前RecyclerView
+     */
+    fun getRecyclerView() = mRecyclerView
+
+    /**
      *包裹内容
      */
     fun setWrapContent() = apply {
-        mRecyclerView.layoutParams =
-            FrameLayout.LayoutParams(
+        mRecyclerView.layoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT
-            )
+        )
     }
+
 
 }
