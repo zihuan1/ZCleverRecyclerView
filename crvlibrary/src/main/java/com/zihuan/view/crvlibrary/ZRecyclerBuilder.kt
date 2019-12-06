@@ -43,7 +43,8 @@ class ZRecyclerBuilder {
     /**
      * 设置分割线
      */
-    fun setDivider(rvd: RecyclerView.ItemDecoration) = apply { mRecyclerView.addItemDecoration(rvd) }
+    fun setDivider(rvd: RecyclerView.ItemDecoration) =
+        apply { mRecyclerView.addItemDecoration(rvd) }
 
     /**
      * 滚动到底部
@@ -67,7 +68,10 @@ class ZRecyclerBuilder {
      */
     fun setWrapContent() = apply {
         mRecyclerView.layoutParams =
-            FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+            FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            )
     }
 
 }
