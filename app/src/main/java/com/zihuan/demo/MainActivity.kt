@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
             list.add("$it")
         }
 //        builder.setData(list)
-        rv_view.getBuilder().setData(list).scrollToBottom()
+        rv_view.getBaseBuilder().setData(list).scrollToBottom()
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main2Activity::class.java))
         }

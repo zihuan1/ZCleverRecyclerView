@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
  * RecyclerView 构建者类
  * @author Zihuan
  */
-class ZBaseRecyclerBuilder {
+open class ZBaseRecyclerBuilder {
 
     private var mRecyclerView: RecyclerView
     private var mZRecyclerData: ZRecyclerData
