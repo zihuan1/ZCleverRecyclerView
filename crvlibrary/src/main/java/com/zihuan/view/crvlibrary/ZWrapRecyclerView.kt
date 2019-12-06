@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
  * RecyclerView 包装类
  * @author Zihuan
  */
-class ZWrapRecyclerView(private var recyclerView: RecyclerView) {
+open class ZWrapRecyclerView(private val recyclerView: RecyclerView) {
 
     private lateinit var mZRecyclerBuilder: ZRecyclerBuilder
 
