@@ -10,14 +10,18 @@ import com.zihuan.view.crvlibrary.ZBaseCleverRecycler
  * RecyclerView 模版类
  * @author Zihuan
  */
-class ZCompleteRecyclerView : ZBaseCleverRecycler<ZCompleteBuilder,ZCompleteWrapper> {
+class ZCompleteRecyclerView : ZBaseCleverRecycler<ZCompleteBuilder, ZCompleteWrapper> {
 
 
     private lateinit var refreshLayout: SmartRefreshLayout
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     override fun createView(): RecyclerView {
         refreshLayout = SmartRefreshLayout(context)
@@ -27,7 +31,8 @@ class ZCompleteRecyclerView : ZBaseCleverRecycler<ZCompleteBuilder,ZCompleteWrap
         return recyclerView
     }
 
-    override fun createWrapper(recyclerView: RecyclerView) = ZCompleteWrapper(recyclerView, refreshLayout)
+    override fun createWrapper(recyclerView: RecyclerView) =
+        ZCompleteWrapper(recyclerView, refreshLayout)
 
     fun getRealBuilder() = getBuilder()
 

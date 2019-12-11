@@ -12,7 +12,7 @@ class Main3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main3)
         var builder = rv_view.buildVerticalLayout(ReAdapter())
-                .setWrapContent()
+            .setWrapContent()
         var list = ArrayList<String>()
         (0..100).forEach {
             list.add("$it")
