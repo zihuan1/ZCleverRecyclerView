@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.zihuan.view.crvlibrary.ZDefRecyclerWrapper
+import com.zihuan.view.crvlibrary.ZEmptyView
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.activity_main2.bt_click
 import kotlinx.android.synthetic.main.activity_main3.*
@@ -25,5 +26,7 @@ class Main2Activity : AppCompatActivity() {
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main3Activity::class.java))
         }
+        builder.setEmptyView()
+        ZEmptyView.emptyLayout = R.layout.empty_layout2
     }
 }

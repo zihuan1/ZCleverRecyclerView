@@ -11,11 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 class ZCleverRecyclerView : ZBaseCleverRecycler<ZBaseRecyclerBuilder, ZDefRecyclerWrapper> {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
+            super(context, attrs, defStyleAttr)
 
     override fun createView(): RecyclerView {
         var recyclerView = RecyclerView(context)

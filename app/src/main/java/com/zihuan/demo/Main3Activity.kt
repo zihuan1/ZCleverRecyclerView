@@ -28,5 +28,6 @@ class Main3Activity : AppCompatActivity() {
                 manager.loadOrPullComplete()
             }
         })
+        builder.setEmptyView()
     }
 }
