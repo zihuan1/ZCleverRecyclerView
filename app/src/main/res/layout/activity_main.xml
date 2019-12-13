@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/bt_click"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            android:id="@+id/bt_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跳页" />
 
     <com.zihuan.view.crvlibrary.ZCleverRecyclerView
-        android:id="@+id/rv_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/bt_click">
+            android:id="@+id/rv_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bt_setdata">
 
 
     </com.zihuan.view.crvlibrary.ZCleverRecyclerView>
 
-    <ImageView
-        android:id="@+id/iv_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher"
-        android:visibility="gone" />
+    <Button
+            android:id="@+id/bt_setdata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher"
+            android:text="设置数据"
+            android:visibility="visible" />
+    <Button
+            android:id="@+id/bt_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_launcher"
+            android:text="清空数据"
+            android:visibility="visible" />
 </RelativeLayout>

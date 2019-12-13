@@ -2,6 +2,7 @@ package com.zihuan.view.crvlibrary
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -17,6 +18,7 @@ open class ZBaseRecyclerBuilder {
 
     private var mRecyclerView: RecyclerView
     private var mZRecyclerData: ZRecyclerData
+    private var emptyView: ZEmptyView? = null
 
     constructor(adapter: RecyclerView.Adapter<*>, type: Int, recyclerView: RecyclerView) {
         if (adapter is ZRecyclerData) {
@@ -33,6 +35,11 @@ open class ZBaseRecyclerBuilder {
 
 
     fun setData(list: List<*>) = apply {
+        if (ZEmptyView.emptyViewShow && list.isNullOrEmpty()) {
+            setEmptyView()
+        } else {
+            dismissEmptyView()
+        }
         mZRecyclerData.update(list)
     }
 
@@ -88,22 +95,30 @@ open class ZBaseRecyclerBuilder {
      * 设置空布局
      */
     fun setEmptyView(view: View = getEmptyView()) {
-        if (mRecyclerView.context is Activity) {
-            mRecyclerView.visibility = View.GONE
-            if (view.visibility != View.VISIBLE) {
-                var parentView =
-                    (mRecyclerView.context as Activity).findViewById<ViewGroup>(android.R.id.content)
-                parentView.addView(view)
-                view.visibility = View.VISIBLE
+        mRecyclerView.visibility = View.GONE
+        if (view.visibility != View.VISIBLE) {
+            if (mRecyclerView.parent is ViewGroup) {
+                (mRecyclerView.parent as ViewGroup).addView(view)
+            } else {
+                Log.e("RecyclerView", "默认空布局不可用,请手动设置")
             }
+            view.visibility = View.VISIBLE
         }
     }
 
-    private var emptyView: ZEmptyView? = null
+    fun dismissEmptyView() {
+        if (mRecyclerView.visibility == View.GONE) {
+            mRecyclerView.visibility = View.VISIBLE
+            emptyView?.visibility = View.GONE
+        }
+    }
+
     private fun getEmptyView(): ZEmptyView {
         if (null == emptyView) {
             emptyView = ZEmptyView(mRecyclerView.context)
         }
         return emptyView!!
     }
+
+
 }

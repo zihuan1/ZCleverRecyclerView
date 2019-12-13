@@ -26,7 +26,7 @@ class Main2Activity : AppCompatActivity() {
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main3Activity::class.java))
         }
-        builder.setEmptyView()
+//        builder.setEmptyView()
         ZEmptyView.emptyLayout = R.layout.empty_layout2
     }
 }

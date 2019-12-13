@@ -12,6 +12,7 @@ class ZEmptyView : FrameLayout {
     }
 
     companion object {
+        var emptyViewShow = true
         var emptyLayout = R.layout.z_recycler_empty_layout
     }
 

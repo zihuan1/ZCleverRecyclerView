@@ -2,6 +2,7 @@ package com.zihuan.view.crvlibrary
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -17,6 +18,7 @@ class ZCleverRecyclerView : ZBaseCleverRecycler<ZBaseRecyclerBuilder, ZDefRecycl
     override fun createView(): RecyclerView {
         var recyclerView = RecyclerView(context)
         addView(recyclerView)
+        Log.e("布局参数top","$top $y $pivotY")
         return recyclerView
     }
 
