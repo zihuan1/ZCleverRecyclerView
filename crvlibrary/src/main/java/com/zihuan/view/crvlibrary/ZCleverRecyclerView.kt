@@ -15,12 +15,8 @@ class ZCleverRecyclerView : ZBaseCleverRecycler<ZBaseRecyclerBuilder, ZDefRecycl
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
             super(context, attrs, defStyleAttr)
 
-    override fun createView(): RecyclerView {
-        var recyclerView = RecyclerView(context)
-        addView(recyclerView)
-        Log.e("布局参数top","$top $y $pivotY")
-        return recyclerView
-    }
+    override fun createView() =
+        RecyclerView(context).apply { this@ZCleverRecyclerView.addView(this) }
 
     override fun createWrapper(recyclerView: RecyclerView) =
         ZDefRecyclerWrapper(recyclerView)
