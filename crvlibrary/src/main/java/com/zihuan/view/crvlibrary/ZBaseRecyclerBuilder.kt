@@ -1,12 +1,9 @@
 package com.zihuan.view.crvlibrary
 
-import android.app.Activity
-import android.content.Context
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -122,5 +119,21 @@ open class ZBaseRecyclerBuilder {
         return emptyView!!
     }
 
+    /**
+     * 设置监听
+     */
+
+    fun setEmptyViewListener(listener: ZEmptyViewListener) {
+        getEmptyView().mListener = listener
+    }
+
+    /**
+     * 设置空布局中的view的点击事件,可以多个
+     * 一定要先设置监听事件
+     */
+    fun setEmptyViewClick(vararg viewId: Int) {
+        getEmptyView().bindClick(*viewId)
+    }
 
 }
+//typealias ZEmptyViewListener = () -> Unit
