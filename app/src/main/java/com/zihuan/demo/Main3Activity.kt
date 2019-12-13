@@ -14,20 +14,22 @@ class Main3Activity : AppCompatActivity() {
         var builder = rv_view.buildVerticalLayout(ReAdapter())
             .setWrapContent()
         var list = ArrayList<String>()
-        (0..100).forEach {
-            list.add("$it")
-        }
         builder.setData(list)
         var manager = rv_view.getRealBuilder()
         manager.setLoadListener(object : OnRefreshLoadMoreListener {
-            override fun onLoadMore(refreshLayout: RefreshLayout) {
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                (0..100).forEach {
+                    list.add("$it")
+                }
+                builder.setData(list)
                 manager.loadOrPullComplete()
             }
 
-            override fun onRefresh(refreshLayout: RefreshLayout) {
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                list.clear()
+                builder.setData(list)
                 manager.loadOrPullComplete()
             }
         })
-        builder.setEmptyView()
     }
 }

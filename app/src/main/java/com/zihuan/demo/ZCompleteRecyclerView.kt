@@ -2,6 +2,8 @@ package com.zihuan.demo
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.zihuan.view.crvlibrary.ZBaseCleverRecycler
@@ -23,12 +25,14 @@ class ZCompleteRecyclerView : ZBaseCleverRecycler<ZCompleteBuilder, ZCompleteWra
         defStyleAttr
     )
 
-    override fun createView(): RecyclerView {
+    override fun createView() = RecyclerView(context).apply {
         refreshLayout = SmartRefreshLayout(context)
-        var recyclerView = RecyclerView(context)
-        refreshLayout.addView(recyclerView)
-        addView(refreshLayout)
-        return recyclerView
+//       由于SmartRefreshLayout只能添加一个view,要想在没数据的时候显示emptyView,就得再嵌套一层布局
+        var recyclerParent = FrameLayout(context)
+        recyclerParent.layoutParams = LayoutParams(-1, -1)
+        recyclerParent.addView(this)
+        refreshLayout.addView(recyclerParent)
+        this@ZCompleteRecyclerView.addView(refreshLayout)
     }
 
     override fun createWrapper(recyclerView: RecyclerView) =

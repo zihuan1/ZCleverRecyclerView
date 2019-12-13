@@ -100,7 +100,8 @@ open class ZBaseRecyclerBuilder {
             view.visibility = View.VISIBLE
             var viewParent = mRecyclerView.parent
             if (viewParent is ViewGroup) {
-                if (viewParent.indexOfChild(view) == -1) viewParent.addView(view)
+                if (viewParent.indexOfChild(view) == -1)
+                    viewParent.addView(view)
             } else {
                 Log.e("RecyclerView", "默认空布局不可用,请手动设置")
             }
