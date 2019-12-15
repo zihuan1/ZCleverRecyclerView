@@ -1,4 +1,4 @@
-# GraceRecyclerView
+# 一行代码实现RecyclerView
 Step 1. Add the JitPack repository to your build file
 
     allprojects {
