@@ -32,8 +32,10 @@ class MainActivity : AppCompatActivity(), ZEmptyViewListener {
             (0..100).forEach {
                 list.add("$it")
             }
-            builder.setData(list)
+            rv_view.getBaseBuilder().getData<String>()[0] = "修改"
             Log.e("获取当前值", rv_view.getBaseBuilder().getData<String>()[0])
+            builder.setData(rv_view.getBaseBuilder().getData<String>())
+
         }
         bt_clear.setOnClickListener {
             rv_view.getBaseBuilder().clearData()
