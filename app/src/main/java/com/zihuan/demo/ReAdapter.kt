@@ -15,6 +15,7 @@ import com.zihuan.view.crvlibrary.ZRecyclerData
  * @date 2019/12/4 11:06
  */
 class ReAdapter : RecyclerView.Adapter<ReAdapter.Viewholder2>(), ZRecyclerData {
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Viewholder2 {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.layout, viewGroup, false)
         return Viewholder2(view)
@@ -27,9 +28,7 @@ class ReAdapter : RecyclerView.Adapter<ReAdapter.Viewholder2>(), ZRecyclerData {
 
     }
 
-    class Viewholder2(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class Viewholder2(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun update(data: List<*>) {
         mList.addAll(data as ArrayList<String>)
