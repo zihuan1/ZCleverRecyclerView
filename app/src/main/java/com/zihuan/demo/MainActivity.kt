@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), ZEmptyViewListener {
 //        rv_view.getBaseBuilder().setEmptyViewListener(ZEmptyViewListener { viewId, _ ->
 //            Log.e("点击1111", "viewid$viewId")
 //        })
+
         rv_view.getBaseBuilder().setData(list)
         rv_view.getBaseBuilder().setEmptyViewClick(R.id.tv_1, R.id.tv_2)
         bt_click.setOnClickListener {
@@ -32,10 +33,10 @@ class MainActivity : AppCompatActivity(), ZEmptyViewListener {
                 list.add("$it")
             }
             builder.setData(list)
+            Log.e("获取当前值", rv_view.getBaseBuilder().getData<String>()[0])
         }
         bt_clear.setOnClickListener {
-            list.clear()
-            rv_view.getBaseBuilder().setData(list)
+            rv_view.getBaseBuilder().clearData()
         }
     }
 

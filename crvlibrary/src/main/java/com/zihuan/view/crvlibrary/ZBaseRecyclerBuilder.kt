@@ -17,6 +17,7 @@ open class ZBaseRecyclerBuilder {
     private var mZRecyclerData: ZRecyclerData
     private var emptyView: ZEmptyView? = null
     private var listData = ArrayList<Any>()
+    private var mDisableEmptyView = true
 
     constructor(adapter: RecyclerView.Adapter<*>, type: Int, recyclerView: RecyclerView) {
         if (adapter is ZRecyclerData) {
@@ -32,12 +33,12 @@ open class ZBaseRecyclerBuilder {
     }
 
     /**
-     *设置数据
+     * 设置数据
      */
-    fun setData(list: List<*>) = apply {
+    fun setData(list: ArrayList<*>) = apply {
         listData.clear()
-        listData.addAll(listOf(list))
-        if (ZEmptyView.emptyViewShow && list.isNullOrEmpty()) {
+        listData.addAll(list)
+        if (ZEmptyView.emptyViewShow && list.isNullOrEmpty() && mDisableEmptyView) {
             setEmptyView()
         } else {
             dismissEmptyView()
@@ -49,6 +50,18 @@ open class ZBaseRecyclerBuilder {
      * 获取当前数据
      */
     fun <T> getData() = listData as ArrayList<T>
+
+    /**
+     * 清空数据
+     */
+    fun clearData() {
+        listData.clear()
+        setData(listData)
+    }
+
+    fun disableCurrentEmptyView() = apply {
+
+    }
 
     /**
      *设置自定义的LayoutManager
