@@ -60,7 +60,11 @@ open class ZBaseRecyclerBuilder {
     }
 
     fun disableCurrentEmptyView() = apply {
+        mDisableEmptyView = false
+    }
 
+    fun eableCurrentEmptyView() = apply {
+        mDisableEmptyView = true
     }
 
     /**
@@ -159,4 +163,3 @@ open class ZBaseRecyclerBuilder {
     }
 
 }
-//typealias ZEmptyViewListener = () -> Unit
