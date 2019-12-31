@@ -35,7 +35,7 @@ open class ZBaseRecyclerBuilder {
     /**
      * 设置数据
      */
-    fun setData(list: ArrayList<*>) = apply {
+    open fun setData(list: ArrayList<*>) = apply {
         listData = list as ArrayList<Any>
         if (ZEmptyView.emptyViewShow && list.isNullOrEmpty() && mDisableEmptyView) {
             setEmptyView()
@@ -59,6 +59,12 @@ open class ZBaseRecyclerBuilder {
             setData(it)
         }
     }
+
+    /**
+     * 获取当前适配器
+     * 暂时的方法将来会优化
+     */
+    fun <T : RecyclerView.Adapter<*>> getAdapter() = getRecyclerView().adapter as T
 
     fun disableCurrentEmptyView() = apply {
         mDisableEmptyView = false
