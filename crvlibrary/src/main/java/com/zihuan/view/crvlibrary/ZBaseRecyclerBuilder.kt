@@ -16,7 +16,7 @@ open class ZBaseRecyclerBuilder {
     private var mRecyclerView: RecyclerView
     private var mZRecyclerData: ZRecyclerData
     private var emptyView: ZEmptyView? = null
-    private var listData: ArrayList<Any>? = null
+    private var listData = ArrayList<Any>()
     private var mDisableEmptyView = true
 
     constructor(adapter: RecyclerView.Adapter<*>, type: Int, recyclerView: RecyclerView) {
@@ -36,7 +36,7 @@ open class ZBaseRecyclerBuilder {
      * 设置数据
      */
     open fun setData(list: ArrayList<*>) = apply {
-        listData = list as ArrayList<Any>
+        listData.addAll(list)
         if (ZEmptyView.emptyViewShow && list.isNullOrEmpty() && mDisableEmptyView) {
             setEmptyView()
         } else {
@@ -54,10 +54,8 @@ open class ZBaseRecyclerBuilder {
      * 清空数据
      */
     fun clearData() {
-        listData?.let {
-            it.clear()
-            setData(it)
-        }
+        listData.clear()
+        setData(listData)
     }
 
     /**
@@ -88,6 +86,11 @@ open class ZBaseRecyclerBuilder {
      */
     fun setDivider(rvd: RecyclerView.ItemDecoration) =
         apply { mRecyclerView.addItemDecoration(rvd) }
+
+//    fun setDivider(action: RecycleViewDivider.() -> Unit) = apply {
+//
+//        mRecyclerView.addItemDecoration()
+//    }
 
     /**
      * 滚动到底部
