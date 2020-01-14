@@ -36,13 +36,14 @@ open class ZBaseRecyclerBuilder {
      * 设置数据
      */
     open fun setData(list: ArrayList<*>) = apply {
+        listData.clear()
         listData.addAll(list)
         if (ZEmptyView.emptyViewShow && list.isNullOrEmpty() && mDisableEmptyView) {
             setEmptyView()
         } else {
             dismissEmptyView()
         }
-        mZRecyclerData.update(list)
+        mZRecyclerData.update(listData)
     }
 
     /**

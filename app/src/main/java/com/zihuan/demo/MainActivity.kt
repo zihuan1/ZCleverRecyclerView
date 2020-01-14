@@ -23,9 +23,7 @@ class MainActivity : AppCompatActivity(), ZEmptyViewListener {
 //            Log.e("点击1111", "viewid$viewId")
 //        })
 
-        rv_view.getBaseBuilder().setData(list).setDivider {
-
-        }
+        rv_view.getBaseBuilder().setData(list)
         rv_view.getBaseBuilder().setEmptyViewClick(R.id.tv_1, R.id.tv_2)
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main2Activity::class.java))
