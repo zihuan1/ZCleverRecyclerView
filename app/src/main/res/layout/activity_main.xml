@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+    <com.zihuan.view.crvlibrary.ZCleverRecyclerView
+            android:id="@+id/rv_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bt_click_perform" />
 
     <Button
             android:id="@+id/bt_click"
@@ -10,14 +16,12 @@
             android:layout_height="wrap_content"
             android:text="跳页" />
 
-    <com.zihuan.view.crvlibrary.ZCleverRecyclerView
-            android:id="@+id/rv_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/bt_setdata">
-
-
-    </com.zihuan.view.crvlibrary.ZCleverRecyclerView>
+    <Button
+            android:id="@+id/bt_click_perform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bt_click"
+            android:text="模拟点击" />
 
     <Button
             android:id="@+id/bt_setdata"
@@ -27,6 +31,7 @@
             android:src="@mipmap/ic_launcher"
             android:text="设置数据"
             android:visibility="visible" />
+
     <Button
             android:id="@+id/bt_clear"
             android:layout_width="wrap_content"

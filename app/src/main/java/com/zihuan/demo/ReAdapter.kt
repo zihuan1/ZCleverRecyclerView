@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zihuan.view.crvlibrary.ZRecyclerData
@@ -27,6 +28,12 @@ class ReAdapter : RecyclerView.Adapter<ReAdapter.Viewholder2>(), ZRecyclerData {
     override fun onBindViewHolder(holder: Viewholder2, position: Int) {
         var view = holder.itemView
         view.findViewById<TextView>(R.id.tvName).text = mList[position]
+        view.setOnClickListener {
+            Log.e("点击", "点击$position")
+        }
+        view.findViewById<ImageView>(R.id.ivTest).setOnClickListener {
+            Log.e("点击", "点击子view $position")
+        }
     }
 
     class Viewholder2(itemView: View) : RecyclerView.ViewHolder(itemView)

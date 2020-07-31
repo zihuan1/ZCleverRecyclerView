@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.IdRes
+import androidx.annotation.IntegerRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -61,7 +63,7 @@ open class ZBaseRecyclerBuilder {
 
     /**
      * 获取当前适配器
-     * 暂时的方法将来会优化
+     * 暂时的方法将来会优化 reified
      */
     fun <T : RecyclerView.Adapter<*>> getAdapter() = getRecyclerView().adapter as T
 
@@ -108,6 +110,34 @@ open class ZBaseRecyclerBuilder {
      */
     fun setCurrentPosition(pos: Int) {
         mRecyclerView.scrollToPosition(pos)
+    }
+
+    /**
+     * 指定位置的Item执行点击事件
+     */
+    fun performItemClick(vararg position: Int) {
+        position.forEach {
+            mRecyclerView.getChildAt(it).performClick()
+        }
+    }
+
+    /**
+     * 指定位置的Item的Child执行点击事件
+     */
+    fun performItemChildClick(vararg position: Int, @IdRes children: Int) {
+        position.forEach {
+            val view = mRecyclerView.getChildAt(it)
+            try {
+                val childView: View? = view.findViewById(children)
+                if (null != childView) {
+                    childView.performClick()
+                } else {
+                    Log.e("RecyclerView", "没有此 $children Id,请检查")
+                }
+            } catch (e: Exception) {
+                Log.e("RecyclerView", "请检查$e")
+            }
+        }
     }
 
     /**
