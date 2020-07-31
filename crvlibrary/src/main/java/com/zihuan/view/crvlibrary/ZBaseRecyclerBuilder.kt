@@ -132,10 +132,10 @@ open class ZBaseRecyclerBuilder {
                 if (null != childView) {
                     childView.performClick()
                 } else {
-                    Log.e("RecyclerView", "没有此 $children Id,请检查")
+                    Log.e("ZBaseRecyclerBuilder", "没有此 $children Id,请检查")
                 }
             } catch (e: Exception) {
-                Log.e("RecyclerView", "请检查$e")
+                Log.e("ZBaseRecyclerBuilder", "请检查$e")
             }
         }
     }
