@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
  * RecyclerView包装类
  * @author Zihuan
  */
-open abstract class BaseRecyclerWrapper<T : BaseRecyclerBuilder> {
+open abstract class ZBaseRecyclerWrapper<T : ZBaseRecyclerBuilder> {
     /**
      * 构建一个竖向布局的view
      */

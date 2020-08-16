@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
  * RecyclerView 模版类
  * @author Zihuan
  */
-abstract class BaseCleverRecycler<B : BaseRecyclerBuilder, T : BaseRecyclerWrapper<B>> :
+abstract class ZBaseCleverRecycler<B : ZBaseRecyclerBuilder, T : ZBaseRecyclerWrapper<B>> :
         FrameLayout {
     lateinit var mRecyclerBuilder: B
 

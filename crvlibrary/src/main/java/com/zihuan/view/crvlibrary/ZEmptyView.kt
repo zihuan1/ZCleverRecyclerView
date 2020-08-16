@@ -9,7 +9,7 @@ import androidx.annotation.IdRes
 /**
  * 空布局类
  */
-class BaseRecyclerEmptyView : FrameLayout {
+class ZEmptyView : FrameLayout {
     /**
      * 默认布局
      */
@@ -35,12 +35,12 @@ class BaseRecyclerEmptyView : FrameLayout {
         inflate(context, resId, this)
     }
 
-    var mListener: EmptyViewListener? = null
+    var mListenerZ: ZEmptyViewListener? = null
     fun bindClick(vararg viewIds: Int) {
-        if (null == mListener) {
+        if (null == mListenerZ) {
             var listener = context
-            if (listener is EmptyViewListener) {
-                mListener = listener
+            if (listener is ZEmptyViewListener) {
+                mListenerZ = listener
             } else {
                 throw NullPointerException("没有实现ZEmptyViewListener空布局点击监听")
             }
@@ -49,7 +49,7 @@ class BaseRecyclerEmptyView : FrameLayout {
         viewIds.forEach {
             findViewById<View>(it)?.setOnClickListener { view ->
                 //应该是返回当前view
-                mListener?.onClick(view.id, view)
+                mListenerZ?.onClick(view.id, view)
             }
         }
     }

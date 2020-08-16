@@ -6,21 +6,21 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.zihuan.view.crvlibrary.BaseRecyclerEmptyView
-import com.zihuan.view.crvlibrary.EmptyViewListener
+import com.zihuan.view.crvlibrary.ZEmptyView
+import com.zihuan.view.crvlibrary.ZEmptyViewListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(),
-        EmptyViewListener {
+        ZEmptyViewListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var builder = rv_view.buildVerticalLayout<ReAdapter>().setWrapContent()
         var list = ArrayList<String>()
-        BaseRecyclerEmptyView.emptyLayout = R.layout.empty_layout
+        ZEmptyView.emptyLayout = R.layout.empty_layout
 //        多个rv可以分别设置
-//        rv_view.getBaseBuilder().setEmptyViewListener(EmptyViewListener { viewId, _ ->
+//        rv_view.getBaseBuilder().setEmptyViewListener(ZEmptyViewListener { viewId, _ ->
 //            Log.e("点击1111", "viewid$viewId")
 //        })
 

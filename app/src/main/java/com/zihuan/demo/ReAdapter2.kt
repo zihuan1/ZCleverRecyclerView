@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.zihuan.view.crvlibrary.RecyclerData
+import com.zihuan.view.crvlibrary.ZRecyclerData
 
 /**
  *
@@ -16,7 +16,7 @@ import com.zihuan.view.crvlibrary.RecyclerData
  * @author zihuan
  * @date 2019/12/4 11:06
  */
-class ReAdapter2() : RecyclerView.Adapter<ReAdapter2.Viewholder2>(), RecyclerData {
+class ReAdapter2() : RecyclerView.Adapter<ReAdapter2.Viewholder2>(), ZRecyclerData {
 
     constructor(context: Context?) : this() {
 
