@@ -13,6 +13,7 @@ class Main3Activity : AppCompatActivity() {
         setContentView(R.layout.activity_main3)
         var builder = rv_view.buildVerticalLayout(ReAdapter())
             .setWrapContent()
+
         var list = ArrayList<String>()
         builder.setData(list)
         var manager = rv_view.getRealBuilder()

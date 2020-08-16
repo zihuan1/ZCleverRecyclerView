@@ -4,7 +4,7 @@
         android:layout_height="match_parent">
 
 
-    <com.zihuan.view.crvlibrary.ZCleverRecyclerView
+    <com.zihuan.view.crvlibrary.CleverRecyclerView
             android:id="@+id/rv_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

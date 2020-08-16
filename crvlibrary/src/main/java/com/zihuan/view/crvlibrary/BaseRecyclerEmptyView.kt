@@ -1,25 +1,45 @@
 package com.zihuan.view.crvlibrary
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
+import androidx.annotation.IdRes
 
-
-class ZEmptyView : FrameLayout {
+/**
+ * 空布局类
+ */
+class BaseRecyclerEmptyView : FrameLayout {
+    /**
+     * 默认布局
+     */
     constructor(context: Context) : super(context) {
-        visibility = View.GONE
-        layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
-        inflate(context, emptyLayout, this)
+        initView(emptyLayout)
     }
 
+    /**
+     * 自定义布局
+     */
+    constructor(view: View) : super(view.context) {
+        visibility = View.GONE
+        addView(view)
+    }
 
-    var mListener: ZEmptyViewListener? = null
+    constructor(@IdRes resId: Int, context: Context) : super(context) {
+        initView(resId)
+    }
+
+    private fun initView(resId: Int) {
+        visibility = View.GONE
+        layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
+        inflate(context, resId, this)
+    }
+
+    var mListener: EmptyViewListener? = null
     fun bindClick(vararg viewIds: Int) {
         if (null == mListener) {
             var listener = context
-            if (listener is ZEmptyViewListener) {
+            if (listener is EmptyViewListener) {
                 mListener = listener
             } else {
                 throw NullPointerException("没有实现ZEmptyViewListener空布局点击监听")
@@ -36,8 +56,8 @@ class ZEmptyView : FrameLayout {
 
     companion object {
         var emptyViewShow = true
-        var emptyLayout = R.layout.z_recycler_empty_layout
-
+        //初始化之前设置emptyLayout可以设置全局空布局
+        var emptyLayout = R.layout.def_recycler_empty_layout
     }
 
 }

@@ -1,5 +1,6 @@
 package com.zihuan.demo
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,15 @@ import com.zihuan.view.crvlibrary.RecyclerData
  * @author zihuan
  * @date 2019/12/4 11:06
  */
-class ReAdapter : RecyclerView.Adapter<ReAdapter.Viewholder2>(), RecyclerData {
+class ReAdapter2() : RecyclerView.Adapter<ReAdapter2.Viewholder2>(), RecyclerData {
+
+    constructor(context: Context?) : this() {
+
+    }
+
+    constructor(list: ArrayList<String>, list2: ArrayList<String>) : this() {
+        Log.e("数据", " ${list}$list2")
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Viewholder2 {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.layout, viewGroup, false)
