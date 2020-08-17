@@ -27,15 +27,15 @@ abstract class ZBaseCleverRecycler<B : ZBaseRecyclerBuilder, T : ZBaseRecyclerWr
     protected abstract fun createWrapper(recyclerView: RecyclerView): T
 
 
-    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildVerticalLayout<Adapter>()"))
+//    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildVerticalLayout<Adapter>()"))
     fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>) =
             createWrapper(createView()).buildVerticalLayout(adapter).apply { mRecyclerBuilder = this }
 
-    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildHorizontalLayout<Adapter>()"))
+//    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildHorizontalLayout<Adapter>()"))
     fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>) =
             createWrapper(createView()).buildHorizontalLayout(adapter).apply { mRecyclerBuilder = this }
 
-    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildGridLayout<Adapter>()"))
+//    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildGridLayout<Adapter>()"))
     fun buildGridLayout(adapter: RecyclerView.Adapter<*>, type: Int) =
             createWrapper(createView()).buildGridLayout(adapter, type).apply { mRecyclerBuilder = this }
 

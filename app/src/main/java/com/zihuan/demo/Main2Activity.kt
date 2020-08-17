@@ -21,9 +21,9 @@ class Main2Activity : AppCompatActivity() {
 //        builder.buildVerticalLayout(ReAdapter()).setData(list)
 //        builder.getBuilder()
 //        var builder = DefRecyclerWrapper(re_view2).buildVerticalLayout(ReAdapter())
-        val list1= arrayListOf("123")
-        val list2= arrayListOf("456")
-        var builder = ZDefRecyclerWrapper(re_view2).buildVerticalLayout<ReAdapter2>()
+        val list1 = arrayListOf("123")
+        val list2 = arrayListOf("456")
+        var builder = ZDefRecyclerWrapper(re_view2).buildVerticalLayout<ReAdapter2>(list1,list2,list1)
         builder.setData(list)
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main3Activity::class.java))
