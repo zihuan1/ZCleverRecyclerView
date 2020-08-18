@@ -9,7 +9,7 @@ import androidx.annotation.IdRes
 /**
  * 空布局类
  */
-class EmptyView : FrameLayout {
+ open class EmptyView : FrameLayout {
     /**
      * 默认布局
      */
