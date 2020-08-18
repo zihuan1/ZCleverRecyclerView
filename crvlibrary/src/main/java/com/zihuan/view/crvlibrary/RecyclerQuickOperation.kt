@@ -1,6 +1,8 @@
 package com.zihuan.view.crvlibrary
 
-import android.widget.FrameLayout
+import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams.MATCH_PARENT
+import android.view.ViewGroup.MarginLayoutParams.WRAP_CONTENT
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -46,23 +48,23 @@ class RecyclerQuickOperation(val mRecyclerView: RecyclerView) {
     fun setCurrentPosition(pos: Int) {
         mRecyclerView.scrollToPosition(pos)
     }
+
     /**
      * RecyclerView设置布局参数
      */
-    fun setRecyclerViewLayoutParam(
-            width: Int = FrameLayout.LayoutParams.MATCH_PARENT,
-            height: Int = FrameLayout.LayoutParams.WRAP_CONTENT
-    ) = apply {
-        mRecyclerView.layoutParams = FrameLayout.LayoutParams(width, height)
+    fun setRecyclerLayoutParams(wth: Int = MATCH_PARENT, hht: Int = WRAP_CONTENT) = apply {
+        val layoutParams = mRecyclerView.layoutParams.apply {
+            width = wth
+            height = hht
+        }
+        mRecyclerView.layoutParams = layoutParams
     }
+
     /**
      *包裹内容
      */
     fun setWrapContent() = apply {
-        mRecyclerView.layoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-        )
+        setRecyclerLayoutParams()
     }
 
 }
