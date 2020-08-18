@@ -23,7 +23,7 @@ abstract class BaseCleverRecycler<Builder : BaseRecyclerBuilder, Wrapper : BaseR
     /**
      * 建议使用最新用法
      * @see buildVerticalLayout<Adapter>
-     * 构造一个指定方向的RecyclerView
+     * 构造一个指定布局方向的RecyclerView
      */
     fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>) =
             createWrapper(createView()).buildVerticalLayout(adapter).apply { mRecyclerBuilder = this }
@@ -57,8 +57,5 @@ abstract class BaseCleverRecycler<Builder : BaseRecyclerBuilder, Wrapper : BaseR
      */
     fun getBuilder() = mRecyclerBuilder
 
-    /**
-     * 获取RecyclerView快捷操作类
-     */
-    fun getRecyclerOperation() = mRecyclerBuilder.mRecyclerQuickOperation
+
 }

@@ -25,6 +25,7 @@ class Main2Activity : AppCompatActivity() {
         val list2 = arrayListOf("456")
         var builder = DefRecyclerWrapper(re_view2).buildVerticalLayout<ReAdapter2>(list1, list2)
         builder.setData(list)
+        builder.getRecyclerOperation().setWrapContent()
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main3Activity::class.java))
         }

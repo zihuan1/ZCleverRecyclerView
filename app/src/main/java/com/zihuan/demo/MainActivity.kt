@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var builder = rv_view.buildVerticalLayout<ReAdapter>()
-        rv_view.getRecyclerOperation().setWrapContent()
+        builder.getRecyclerOperation().setWrapContent()
 //        rv_view.buildVerticalLayout(ReAdapter())
         var list = ArrayList<String>()
         EmptyView.emptyLayout = R.layout.empty_layout

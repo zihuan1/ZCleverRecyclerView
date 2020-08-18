@@ -1,11 +1,8 @@
 package com.zihuan.view.crvlibrary
 
-import android.app.Activity
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.FrameLayout
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +18,7 @@ open class BaseRecyclerBuilder {
     private var emptyViewBase: EmptyView? = null
     private var listData = ArrayList<Any>()
     private var mDisableEmptyView = true
-    internal var mRecyclerQuickOperation: RecyclerQuickOperation
+    private var mRecyclerQuickOperation: RecyclerQuickOperation
 
     constructor(adapter: RecyclerView.Adapter<*>, type: Int, recyclerView: RecyclerView) {
         if (adapter is RecyclerData) {
@@ -154,4 +151,8 @@ open class BaseRecyclerBuilder {
         getEmptyView().bindClick(*viewId)
     }
 
+    /**
+     * 获取RecyclerView快捷操作类
+     */
+    fun getRecyclerOperation() = mRecyclerQuickOperation
 }

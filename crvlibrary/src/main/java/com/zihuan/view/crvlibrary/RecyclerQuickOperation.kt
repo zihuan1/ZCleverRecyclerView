@@ -46,7 +46,15 @@ class RecyclerQuickOperation(val mRecyclerView: RecyclerView) {
     fun setCurrentPosition(pos: Int) {
         mRecyclerView.scrollToPosition(pos)
     }
-
+    /**
+     * RecyclerView设置布局参数
+     */
+    fun setRecyclerViewLayoutParam(
+            width: Int = FrameLayout.LayoutParams.MATCH_PARENT,
+            height: Int = FrameLayout.LayoutParams.WRAP_CONTENT
+    ) = apply {
+        mRecyclerView.layoutParams = FrameLayout.LayoutParams(width, height)
+    }
     /**
      *包裹内容
      */
