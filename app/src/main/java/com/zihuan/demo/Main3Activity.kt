@@ -12,11 +12,11 @@ class Main3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main3)
         var builder = rv_view.buildVerticalLayout(ReAdapter())
-            .setWrapContent()
+        rv_view.getRecyclerOperation().setWrapContent()
 
         var list = ArrayList<String>()
         builder.setData(list)
-        var manager = rv_view.getRealBuilder()
+        var manager = rv_view.getBuilder()
         manager.setLoadListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 (0..100).forEach {

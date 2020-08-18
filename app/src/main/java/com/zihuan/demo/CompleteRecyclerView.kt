@@ -6,6 +6,7 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.zihuan.view.crvlibrary.BaseCleverRecycler
+import com.zihuan.view.crvlibrary.RecyclerQuickOperation
 
 /**
  * RecyclerView 模版类
@@ -32,7 +33,4 @@ class CompleteRecyclerView : BaseCleverRecycler<CompleteBuilder, CompleteWrapper
 
     override fun createWrapper(recyclerView: RecyclerView) =
         CompleteWrapper(recyclerView, refreshLayout)
-
-    fun getRealBuilder() = getBuilder()
-
 }

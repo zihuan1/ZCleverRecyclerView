@@ -17,13 +17,6 @@ class CleverRecyclerView : BaseCleverRecycler<BaseRecyclerBuilder, DefRecyclerWr
     override fun createView() =
             RecyclerView(context).apply { this@CleverRecyclerView.addView(this) }
 
-    override fun createWrapper(recyclerView: RecyclerView) =
-            DefRecyclerWrapper(recyclerView)
-
-    /**
-     * 获取当前构建者之前,一定要调用buildVerticalLayout等方法进行创建
-     */
-    fun getBaseBuilder() = getBuilder()
-
+    override fun createWrapper(recyclerView: RecyclerView) = DefRecyclerWrapper(recyclerView)
 
 }

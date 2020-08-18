@@ -1,5 +1,6 @@
 package com.zihuan.view.crvlibrary
 
+import android.app.Activity
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ open class BaseRecyclerBuilder {
     private var emptyViewBase: EmptyView? = null
     private var listData = ArrayList<Any>()
     private var mDisableEmptyView = true
+    internal var mRecyclerQuickOperation: RecyclerQuickOperation
 
     constructor(adapter: RecyclerView.Adapter<*>, type: Int, recyclerView: RecyclerView) {
         if (adapter is RecyclerData) {
@@ -32,6 +34,7 @@ open class BaseRecyclerBuilder {
             LinearLayoutManager.HORIZONTAL -> recyclerView.initHorizontal(adapter)
             else -> recyclerView.initGrid(type, adapter)
         }
+        mRecyclerQuickOperation = RecyclerQuickOperation(mRecyclerView)
     }
 
     /**
@@ -61,51 +64,18 @@ open class BaseRecyclerBuilder {
         setData(listData)
     }
 
+
     /**
-     * 获取当前适配器
+     * 控制当前RecyclerView的空布局显示状态
      */
-    fun <T : RecyclerView.Adapter<*>> getAdapter() = getRecyclerView().adapter as T
-
-
     fun disableCurrentEmptyView() = apply {
         mDisableEmptyView = false
     }
 
-    fun eableCurrentEmptyView() = apply {
+    fun enableCurrentEmptyView() = apply {
         mDisableEmptyView = true
     }
 
-    /**
-     *设置自定义的LayoutManager
-     */
-    fun setLayoutManager(layoutManager: RecyclerView.LayoutManager) {
-        mRecyclerView.layoutManager = layoutManager
-    }
-
-    fun <T : RecyclerView.LayoutManager> getLayoutManager() = mRecyclerView.layoutManager as T
-
-    /**
-     * 设置分割线
-     */
-    fun setDivider(rvd: RecyclerView.ItemDecoration) =
-            apply { mRecyclerView.addItemDecoration(rvd) }
-
-    /**
-     * 滚动到底部
-     */
-    fun scrollToBottom() = apply { scrollToPosition(mRecyclerView.adapter!!.itemCount) }
-
-    /***
-     *滚动到指定位置 有动画
-     */
-    fun scrollToPosition(pos: Int) = apply { mRecyclerView.smoothScrollToPosition(pos) }
-
-    /***
-     *滚动到指定位置 没有动画
-     */
-    fun setCurrentPosition(pos: Int) {
-        mRecyclerView.scrollToPosition(pos)
-    }
 
     /**
      * 指定位置的Item执行点击事件
@@ -139,17 +109,6 @@ open class BaseRecyclerBuilder {
      * 获取获取当前RecyclerView
      */
     fun getRecyclerView() = mRecyclerView
-
-    /**
-     *包裹内容
-     */
-    fun setWrapContent() = apply {
-        mRecyclerView.layoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-        )
-    }
-
 
     /**
      * 设置空布局

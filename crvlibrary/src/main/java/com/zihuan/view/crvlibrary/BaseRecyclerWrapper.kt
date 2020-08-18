@@ -72,7 +72,4 @@ open abstract class BaseRecyclerWrapper<Builder : BaseRecyclerBuilder> {
      */
     abstract fun createBuilder(adapter: RecyclerView.Adapter<*>, type: Int): Builder
 
-
-//    abstract fun setAdapter(adapter: RecyclerView.Adapter<*>)
-
 }

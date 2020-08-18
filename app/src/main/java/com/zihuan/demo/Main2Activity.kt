@@ -23,12 +23,11 @@ class Main2Activity : AppCompatActivity() {
 //        var builder = DefRecyclerWrapper(re_view2).buildVerticalLayout(ReAdapter())
         val list1 = arrayListOf("123")
         val list2 = arrayListOf("456")
-        var builder = DefRecyclerWrapper(re_view2).buildVerticalLayout<ReAdapter2>(list1,list2)
+        var builder = DefRecyclerWrapper(re_view2).buildVerticalLayout<ReAdapter2>(list1, list2)
         builder.setData(list)
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main3Activity::class.java))
         }
-//        builder.setEmptyView()
         EmptyView.emptyLayout = R.layout.empty_layout2
     }
 }
