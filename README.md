@@ -29,8 +29,10 @@ rv_view.getBuilder().setEmptyView(EmptyView(R.layout.el,this))
 并且包含普通适配器，多布局适配器，二级列表适配器，RecyclerBindAdapter等
 
 * 刷新
+
 融合了刷新加载等全功能版本recyclerview
 https://github.com/zihuan1/view-complete-recyclerview
 
 * 依赖地址
+
 implementation 'com.github.zihuan1:view-grace-recyclerview:0.5.2'
