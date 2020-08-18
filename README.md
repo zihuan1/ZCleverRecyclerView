@@ -31,6 +31,7 @@ rv_view.getBuilder().setEmptyView(EmptyView(R.layout.el,this))
 * 刷新
 
 融合了刷新加载等全功能版本recyclerview
+
 https://github.com/zihuan1/view-complete-recyclerview
 
 * 依赖地址
