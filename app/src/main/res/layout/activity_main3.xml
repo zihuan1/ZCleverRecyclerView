@@ -9,12 +9,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-    <com.zihuan.demo.CompleteRecyclerViewZ
+    <com.zihuan.demo.CompleteRecyclerView
             android:id="@+id/rv_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/bt_click">
 
-    </com.zihuan.demo.CompleteRecyclerViewZ>
+    </com.zihuan.demo.CompleteRecyclerView>
 
 </RelativeLayout>

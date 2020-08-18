@@ -1,24 +1,24 @@
 package com.zihuan.view.crvlibrary
 
-import android.util.Log
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 
 /**
  * RecyclerView包装类
  * @author Zihuan
  */
-open abstract class ZBaseRecyclerWrapper<T : ZBaseRecyclerBuilder> {
+open abstract class BaseRecyclerWrapper<Builder : BaseRecyclerBuilder> {
     /**
      * 构建一个竖向布局的view
      */
-//    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildVerticalLayout<Adapter>()"))
     fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>) = createBuilder(adapter, RECYCLER_VERTICAL)
 
     /**
      * 传一个Adapter泛型自动实例化,与上一个方法没有本质区别
      * @param Adapter 适配器泛型
      * @param parameters 构造函数需要的参数列表
-     * parameters数量一定要与构造函数所需的参数数量相匹配，否则会尝试创建空函数类，创建空参函数失败后会crash
+     * parameters数量一定要与构造函数所需的参数数量相匹配，否则抛出异常
      * 注意：Adapter中的构造函数目前不支持可变长参数，只能是固定参数
      *
      */
@@ -29,7 +29,6 @@ open abstract class ZBaseRecyclerWrapper<T : ZBaseRecyclerBuilder> {
     /**
      * 构建一个横向布局的view
      */
-//    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildHorizontalLayout<Adapter>()"))
     fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>) =
             createBuilder(adapter, RECYCLER_HORIZONTAL)
 
@@ -39,7 +38,6 @@ open abstract class ZBaseRecyclerWrapper<T : ZBaseRecyclerBuilder> {
     /**
      * 构建一个九宫格布局的view
      */
-//    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("buildGridLayout<Adapter>()"))
     fun buildGridLayout(adapter: RecyclerView.Adapter<*>, type: Int) =
             createBuilder(adapter, type)
 
@@ -47,7 +45,8 @@ open abstract class ZBaseRecyclerWrapper<T : ZBaseRecyclerBuilder> {
             newAdapter<Adapter>(type, *parameters)
 
 
-    inline fun <reified Adapter : RecyclerView.Adapter<*>> newAdapter(type: Int, vararg parameters: Any): T {
+    @RequiresApi(Build.VERSION_CODES.O)
+    inline fun <reified Adapter : RecyclerView.Adapter<*>> newAdapter(type: Int, vararg parameters: Any): Builder {
 //        val paramTypes = parameters.map { it::class.java }.toTypedArray()
 //        val adapter = Adapter::class.java.getDeclaredConstructor(*paramTypes).newInstance(*parameters)
         //获取目标类构造列表
@@ -63,7 +62,6 @@ open abstract class ZBaseRecyclerWrapper<T : ZBaseRecyclerBuilder> {
             }
         }
         if (adapter2 == null) {
-//            adapter2 = Adapter::class.java.getDeclaredConstructor().newInstance(*parameters)
             throw NoSuchMethodException("没有与${parameters.map { it.javaClass.simpleName }}匹配的构造函数")
         }
         return createBuilder(adapter2!!, type)
@@ -72,7 +70,9 @@ open abstract class ZBaseRecyclerWrapper<T : ZBaseRecyclerBuilder> {
     /**
      * 包装RecyclerView
      */
-    abstract fun createBuilder(adapter: RecyclerView.Adapter<*>, type: Int): T
+    abstract fun createBuilder(adapter: RecyclerView.Adapter<*>, type: Int): Builder
 
+
+//    abstract fun setAdapter(adapter: RecyclerView.Adapter<*>)
 
 }

@@ -4,11 +4,11 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
-import com.zihuan.view.crvlibrary.ZBaseRecyclerBuilder
+import com.zihuan.view.crvlibrary.BaseRecyclerBuilder
 
-class CompleteBuilderZ(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>, type: Int
-                       , private val refreshLayout: SmartRefreshLayout
-) : ZBaseRecyclerBuilder(adapter, type, recyclerView) {
+class CompleteBuilder(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>, type: Int
+                      , private val refreshLayout: SmartRefreshLayout
+) : BaseRecyclerBuilder(adapter, type, recyclerView) {
 
     /**
      * RecyclerView设置布局参数

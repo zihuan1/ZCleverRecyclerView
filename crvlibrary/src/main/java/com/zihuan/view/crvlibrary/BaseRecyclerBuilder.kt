@@ -3,6 +3,7 @@ package com.zihuan.view.crvlibrary
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.FrameLayout
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
  * RecyclerView 构建者类
  * @author Zihuan
  */
-open class ZBaseRecyclerBuilder {
+open class BaseRecyclerBuilder {
 
     private var mRecyclerView: RecyclerView
-    private var mZRecyclerData: ZRecyclerData
-    private var emptyViewBase: ZEmptyView? = null
+    private var mZRecyclerData: RecyclerData
+    private var emptyViewBase: EmptyView? = null
     private var listData = ArrayList<Any>()
     private var mDisableEmptyView = true
 
     constructor(adapter: RecyclerView.Adapter<*>, type: Int, recyclerView: RecyclerView) {
-        if (adapter is ZRecyclerData) {
+        if (adapter is RecyclerData) {
             mZRecyclerData = adapter
         } else {
             throw ClassCastException("没有实现数据刷新接口")
@@ -39,7 +40,7 @@ open class ZBaseRecyclerBuilder {
     open fun setData(list: ArrayList<*>) = apply {
         listData.clear()
         listData.addAll(list)
-        if (ZEmptyView.emptyViewShow && list.isNullOrEmpty() && mDisableEmptyView) {
+        if (EmptyView.emptyViewShow && list.isNullOrEmpty() && mDisableEmptyView) {
             setEmptyView()
         } else {
             dismissEmptyView()
@@ -62,10 +63,10 @@ open class ZBaseRecyclerBuilder {
 
     /**
      * 获取当前适配器
-     * 暂时的方法将来会优化 reified
      */
-    //    @Deprecated(message = "请使用最新用法", replaceWith = ReplaceWith("getAdapter()"))
     fun <T : RecyclerView.Adapter<*>> getAdapter() = getRecyclerView().adapter as T
+
+
     fun disableCurrentEmptyView() = apply {
         mDisableEmptyView = false
     }
@@ -88,11 +89,6 @@ open class ZBaseRecyclerBuilder {
      */
     fun setDivider(rvd: RecyclerView.ItemDecoration) =
             apply { mRecyclerView.addItemDecoration(rvd) }
-
-//    fun setDivider(action: RecycleViewDivider.() -> Unit) = apply {
-//
-//        mRecyclerView.addItemDecoration()
-//    }
 
     /**
      * 滚动到底部
@@ -131,10 +127,10 @@ open class ZBaseRecyclerBuilder {
                 if (null != childView) {
                     childView.performClick()
                 } else {
-                    Log.e("ZBaseRecyclerBuilder", "没有此 $children Id,请检查")
+                    Log.e("BaseRecyclerBuilder", "没有此 $children Id,请检查")
                 }
             } catch (e: Exception) {
-                Log.e("ZBaseRecyclerBuilder", "请检查$e")
+                Log.e("BaseRecyclerBuilder", "请检查$e")
             }
         }
     }
@@ -158,32 +154,28 @@ open class ZBaseRecyclerBuilder {
     /**
      * 设置空布局
      */
-    fun setEmptyView(viewBase: ZEmptyView = getEmptyView()) {
+    fun setEmptyView(viewBase: EmptyView = getEmptyView()) {
         mRecyclerView.visibility = View.GONE
-        if (viewBase.visibility != View.VISIBLE) {
-
-            viewBase.visibility = View.VISIBLE
-            var viewParent = mRecyclerView.parent
-            if (viewParent is ViewGroup) {
-                if (viewParent.indexOfChild(viewBase) == -1)
-                    viewParent.addView(viewBase)
-            } else {
-                Log.e("RecyclerView", "默认空布局不可用,请手动设置")
-            }
+        emptyViewBase = viewBase
+        viewBase.visibility = View.VISIBLE
+        var viewParent = mRecyclerView.parent
+        if (viewParent is ViewGroup) {
+            if (viewParent.indexOfChild(viewBase) == -1)
+                viewParent.addView(viewBase)
+        } else {
+            Log.e("RecyclerView", "默认空布局不可用,请手动设置")
         }
     }
 
-    fun dismissEmptyView() {
+    private fun dismissEmptyView() {
         if (mRecyclerView.visibility == View.GONE) {
             mRecyclerView.visibility = View.VISIBLE
             emptyViewBase?.visibility = View.GONE
         }
     }
 
-    private fun getEmptyView(): ZEmptyView {
-        if (null == emptyViewBase) {
-            emptyViewBase = ZEmptyView(mRecyclerView.context)
-        }
+    private fun getEmptyView(): EmptyView {
+        if (null == emptyViewBase) emptyViewBase = EmptyView(mRecyclerView.context)
         return emptyViewBase!!
     }
 
@@ -191,8 +183,8 @@ open class ZBaseRecyclerBuilder {
      * 设置监听
      */
 
-    fun setEmptyViewListener(listenerZ: ZEmptyViewListener) {
-        getEmptyView().mListenerZ = listenerZ
+    fun setEmptyViewListener(listener: EmptyViewListener) {
+        getEmptyView().mListener = listener
     }
 
     /**

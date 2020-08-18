@@ -5,13 +5,13 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.zihuan.view.crvlibrary.ZBaseCleverRecycler
+import com.zihuan.view.crvlibrary.BaseCleverRecycler
 
 /**
  * RecyclerView 模版类
  * @author Zihuan
  */
-class CompleteRecyclerViewZ : ZBaseCleverRecycler<CompleteBuilderZ, CompleteWrapperZ> {
+class CompleteRecyclerView : BaseCleverRecycler<CompleteBuilder, CompleteWrapper> {
 
 
     private lateinit var refreshLayout: SmartRefreshLayout
@@ -27,11 +27,11 @@ class CompleteRecyclerViewZ : ZBaseCleverRecycler<CompleteBuilderZ, CompleteWrap
         recyclerParent.layoutParams = LayoutParams(-1, -1)
         recyclerParent.addView(this)
         refreshLayout.addView(recyclerParent)
-        this@CompleteRecyclerViewZ.addView(refreshLayout)
+        this@CompleteRecyclerView.addView(refreshLayout)
     }
 
     override fun createWrapper(recyclerView: RecyclerView) =
-        CompleteWrapperZ(recyclerView, refreshLayout)
+        CompleteWrapper(recyclerView, refreshLayout)
 
     fun getRealBuilder() = getBuilder()
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.zihuan.view.crvlibrary.ZRecyclerData
+import com.zihuan.view.crvlibrary.RecyclerData
 
 /**
  *
@@ -15,7 +15,7 @@ import com.zihuan.view.crvlibrary.ZRecyclerData
  * @author zihuan
  * @date 2019/12/4 11:06
  */
-class ReAdapter : RecyclerView.Adapter<ReAdapter.Viewholder2>(), ZRecyclerData {
+class ReAdapter : RecyclerView.Adapter<ReAdapter.Viewholder2>(), RecyclerData {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Viewholder2 {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.layout, viewGroup, false)

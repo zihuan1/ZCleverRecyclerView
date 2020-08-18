@@ -3,7 +3,7 @@ package com.zihuan.view.crvlibrary;
 import android.view.View;
 
 
-public interface ZEmptyViewListener {
+public interface EmptyViewListener {
     /**
      * @param viewId 当前viewId
      * @param view   当前view
