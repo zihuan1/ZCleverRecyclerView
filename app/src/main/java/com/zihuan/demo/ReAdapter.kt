@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.zihuan.view.crvlibrary.RecyclerData
 
@@ -29,6 +30,7 @@ class ReAdapter : RecyclerView.Adapter<ReAdapter.Viewholder2>(), RecyclerData {
         var view = holder.itemView
         view.findViewById<TextView>(R.id.tvName).text = mList[position]
         view.setOnClickListener {
+            Toast.makeText(view.context, "点击$position", Toast.LENGTH_LONG).show()
             Log.e("点击", "点击$position")
         }
         view.findViewById<ImageView>(R.id.ivTest).setOnClickListener {

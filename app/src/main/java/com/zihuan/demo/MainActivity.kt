@@ -11,7 +11,7 @@ import com.zihuan.view.crvlibrary.EmptyViewListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(),
-        EmptyViewListener {
+    EmptyViewListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,21 +26,22 @@ class MainActivity : AppCompatActivity(),
             Log.e("点击1111", "viewid$viewId")
         })
 
-        (0..10).forEach {
+        (0..20).forEach {
             list.add("$it")
         }
+
         rv_view.getBuilder().setData(list)
         rv_view.getBuilder().setEmptyViewClick(R.id.tv_1, R.id.tv_2)
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main2Activity::class.java))
         }
         bt_click_perform.setOnClickListener {
-            Toast.makeText(this, "点击", Toast.LENGTH_LONG).show()
-//            rv_view.getBuilder().performItemClick(1, 2, 3)
-            rv_view.getBuilder().performItemChildClick(1, 2, 3, children = R.id.tv_2)
+//            Toast.makeText(this, "点击", Toast.LENGTH_LONG).show()
+            rv_view.getBuilder().performItemClick(1)
+//            rv_view.getBuilder().performItemChildClick(1, children = R.id.ivTest)
         }
         bt_setdata.setOnClickListener {
-            (0..10).forEach {
+            (0..20).forEach {
                 list.add("$it")
             }
             builder.setData(list)

@@ -76,21 +76,34 @@ open class BaseRecyclerBuilder {
 
     /**
      * 指定位置的Item执行点击事件
+     * 需要注意的是指定的位置必须在屏幕内
      */
     fun performItemClick(vararg position: Int) {
         position.forEach {
-            mRecyclerView.getChildAt(it).performClick()
+            val layoutManager = mRecyclerView.layoutManager
+            val view = layoutManager?.findViewByPosition(it)
+            if (null == view) {
+                Log.e("BaseRecyclerBuilder", "$it 位置Item没有在屏幕内")
+                return
+            }
+            view.performClick()
         }
     }
 
     /**
      * 指定位置的Item的Child执行点击事件
+     * 需要注意的是指定的位置必须在屏幕内
      */
     fun performItemChildClick(vararg position: Int, @IdRes children: Int) {
         position.forEach {
-            val view = mRecyclerView.getChildAt(it)
             try {
-                val childView: View? = view.findViewById(children)
+                val layoutManager = mRecyclerView.layoutManager
+                val view = layoutManager?.findViewByPosition(it)
+                if (null == view) {
+                    Log.e("BaseRecyclerBuilder", "没有此 $children Id,或$it 位置Item没有在屏幕内")
+                    return
+                }
+                val childView: View = view.findViewById(children)
                 if (null != childView) {
                     childView.performClick()
                 } else {
