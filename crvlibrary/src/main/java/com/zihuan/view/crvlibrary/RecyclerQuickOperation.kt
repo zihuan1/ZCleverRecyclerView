@@ -30,7 +30,7 @@ class RecyclerQuickOperation(val mRecyclerView: RecyclerView) {
      * 设置分割线
      */
     fun setDivider(rvd: RecyclerView.ItemDecoration) =
-            apply { mRecyclerView.addItemDecoration(rvd) }
+        apply { mRecyclerView.addItemDecoration(rvd) }
 
     /**
      * 滚动到底部
@@ -65,6 +65,18 @@ class RecyclerQuickOperation(val mRecyclerView: RecyclerView) {
      */
     fun setWrapContent() = apply {
         setRecyclerLayoutParams()
+    }
+
+    /**
+     * 宽高都是包裹内容
+     */
+    fun setGlobalWrapContent() {
+        val viewGroup = mRecyclerView.parent as ViewGroup
+        val layoutParams = viewGroup.layoutParams
+        layoutParams.width = WRAP_CONTENT
+        layoutParams.height = WRAP_CONTENT
+        viewGroup.layoutParams = layoutParams
+        setRecyclerLayoutParams(WRAP_CONTENT)
     }
 
 }
