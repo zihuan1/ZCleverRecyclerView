@@ -79,4 +79,6 @@ class RecyclerQuickOperation(val mRecyclerView: RecyclerView) {
         setRecyclerLayoutParams(WRAP_CONTENT)
     }
 
+
+
 }

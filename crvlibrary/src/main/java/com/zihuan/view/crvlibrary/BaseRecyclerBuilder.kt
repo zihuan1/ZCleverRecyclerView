@@ -116,6 +116,29 @@ open class BaseRecyclerBuilder {
     }
 
     /**
+     *
+     */
+    fun addOnScrollListener() {
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val manager = recyclerView.layoutManager as LinearLayoutManager
+                // 当不滚动时
+                if (newState === RecyclerView.SCROLL_STATE_IDLE) {
+                    //获取最后一个完全显示的ItemPosition
+                    val lastVisibleItem = manager.findFirstCompletelyVisibleItemPosition()
+                    val totalItemCount = manager.itemCount
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+            }
+        })
+    }
+
+    /**
      * 获取获取当前RecyclerView
      */
     fun getRecyclerView() = mRecyclerView
