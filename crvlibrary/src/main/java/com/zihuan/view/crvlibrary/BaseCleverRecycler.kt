@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Zihuan
  */
 abstract class BaseCleverRecycler<Builder : BaseRecyclerBuilder, Wrapper : BaseRecyclerWrapper<Builder>> : FrameLayout {
-    protected lateinit var mRecyclerBuilder: Builder
+    lateinit var mRecyclerBuilder: Builder
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    protected abstract fun createView(): RecyclerView
+    abstract fun createView(): RecyclerView
 
-    protected abstract fun createWrapper(recyclerView: RecyclerView): Wrapper
+    abstract fun createWrapper(recyclerView: RecyclerView): Wrapper
 
     /**
      * 建议使用最新用法

@@ -1,15 +1,14 @@
 package com.zihuan.view.crvlibrary
 
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 
 interface RecyclerViewScrollListener {
 
     /**
-     * @param view RecyclerView
      * @param state 滚动状态
-     * @param scrollX 横向滚动
-     * @param scrollY 竖向滚动
+     * @param layoutManager 布局管理器
+     * @param scrollX 横向滚动 正值向上滚动负值向下滚动
+     * @param scrollY 竖向滚动 正直像左滚动负值向由滚动
      */
-    fun onScrollStateChanged(view:RecyclerView,state:Int,orientation:Int,scrollX:Int,scrollY:Int)
-    fun onScrollIng(view:RecyclerView)
+    fun onScrollStateChanged(state:Int, layoutManager: LinearLayoutManager, scrollX:Int, scrollY:Int)
 }

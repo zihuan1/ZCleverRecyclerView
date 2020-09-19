@@ -6,12 +6,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.zihuan.view.crvlibrary.EmptyView
 import com.zihuan.view.crvlibrary.EmptyViewListener
+import com.zihuan.view.crvlibrary.RecyclerViewScrollListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(),
-    EmptyViewListener {
+        EmptyViewListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,12 @@ class MainActivity : AppCompatActivity(),
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main2Activity::class.java))
         }
+        builder.addOnScrollListener(object : RecyclerViewScrollListener {
+            override fun onScrollStateChanged(state: Int, layoutManager: LinearLayoutManager, scrollX: Int, scrollY: Int) {
+                Log.e("addOnScrollListener 状态", "state$state scrollY$scrollY")
+
+            }
+        })
         bt_click_perform.setOnClickListener {
 //            Toast.makeText(this, "点击", Toast.LENGTH_LONG).show()
             rv_view.getBuilder().performItemClick(1)

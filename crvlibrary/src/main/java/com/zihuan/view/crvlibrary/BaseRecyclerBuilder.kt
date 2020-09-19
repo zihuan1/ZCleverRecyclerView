@@ -4,8 +4,12 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.zihuan.view.crvlibrary.CleverConstants.SCROLL_STATE_SCROLLING
+import com.zihuan.view.crvlibrary.CleverConstants.SCROLL_STATE_START
+import com.zihuan.view.crvlibrary.CleverConstants.SCROLL_STATE_STOP
 
 /**
  * RecyclerView 构建者类
@@ -116,23 +120,38 @@ open class BaseRecyclerBuilder {
     }
 
     /**
-     *
+     * 监听RecyclerView滚动
      */
-    fun addOnScrollListener() {
+    fun addOnScrollListener(listener: RecyclerViewScrollListener) {
+        var currentDx = 0
+        var currentDy = 0
+        var state = SCROLL_STATE_STOP
+        var layoutManager: LinearLayoutManager? = null
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                val manager = recyclerView.layoutManager as LinearLayoutManager
-                // 当不滚动时
-                if (newState === RecyclerView.SCROLL_STATE_IDLE) {
-                    //获取最后一个完全显示的ItemPosition
-                    val lastVisibleItem = manager.findFirstCompletelyVisibleItemPosition()
-                    val totalItemCount = manager.itemCount
+                if (recyclerView.layoutManager is LinearLayoutManager) {
+                    layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    state = when (newState) {
+                        RecyclerView.SCROLL_STATE_DRAGGING -> SCROLL_STATE_START
+                        RecyclerView.SCROLL_STATE_IDLE -> SCROLL_STATE_STOP
+                        else -> SCROLL_STATE_SCROLLING
+                    }
                 }
+                layoutManager?.apply {
+                    listener.onScrollStateChanged(state, this, currentDx, currentDy)
+                }
+//                Log.e("onScrollStateChanged 状态", state.toString())
             }
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+//                Log.e("onScrolled 状态", "$SCROLL_STATE_SCROLLING")
+                currentDx = dx
+                currentDy = dy
+                layoutManager?.apply {
+                    listener.onScrollStateChanged(SCROLL_STATE_SCROLLING, this, currentDx, currentDy)
+                }
 
             }
         })
