@@ -57,7 +57,8 @@ open abstract class BaseRecyclerWrapper<Builder : BaseRecyclerBuilder> {
             if (it.parameterCount == parameters.size) {
                 //获取目标类运行时构造参数列表所需类型，以构造函数需要的类型为准
                 var paramTypes2 = it.parameters.map { mapIt -> mapIt.type }.toTypedArray()
-                adapter2 = Adapter::class.java.getDeclaredConstructor(*paramTypes2).newInstance(*parameters)
+                adapter2 = Adapter::class.java.getDeclaredConstructor(*paramTypes2)
+                        .newInstance(*parameters)
                 return@forEach
             }
         }

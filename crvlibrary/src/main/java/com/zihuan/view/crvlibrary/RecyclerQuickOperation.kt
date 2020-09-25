@@ -19,18 +19,19 @@ class RecyclerQuickOperation(val mRecyclerView: RecyclerView) {
         mRecyclerView.layoutManager = layoutManager
     }
 
-    fun <T : RecyclerView.LayoutManager> getLayoutManager() = mRecyclerView.layoutManager as T
+    fun <T : RecyclerView.LayoutManager> getLayoutManager(): T {
+        return mRecyclerView.layoutManager as T
+    }
 
     /**
      * 获取当前适配器
      */
-    fun <T : RecyclerView.Adapter<*>> getAdapter() = mRecyclerView.adapter as T
-
+    fun <A:RecyclerView.Adapter<*>> getAdapter() = mRecyclerView.adapter as A
     /**
      * 设置分割线
      */
     fun setDivider(rvd: RecyclerView.ItemDecoration) =
-        apply { mRecyclerView.addItemDecoration(rvd) }
+            apply { mRecyclerView.addItemDecoration(rvd) }
 
     /**
      * 滚动到底部
@@ -78,7 +79,6 @@ class RecyclerQuickOperation(val mRecyclerView: RecyclerView) {
         viewGroup.layoutParams = layoutParams
         setRecyclerLayoutParams(WRAP_CONTENT)
     }
-
 
 
 }

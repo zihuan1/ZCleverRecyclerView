@@ -2,6 +2,7 @@ package com.zihuan.demo
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
         var builder = rv_view.buildVerticalLayout<ReAdapter>()
         builder.getRecyclerOperation().setWrapContent()
+//        val adapter = builder.getRecyclerOperation().getAdapter()
 //        rv_view.buildVerticalLayout(ReAdapter())
         var list = ArrayList<String>()
         EmptyView.emptyLayout = R.layout.empty_layout
@@ -27,9 +29,12 @@ class MainActivity : AppCompatActivity(),
         rv_view.getBuilder().setEmptyViewListener { viewId, _ ->
             Log.e("点击1111", "viewid$viewId")
         }
-        (0..20).forEach {
-            list.add("$it")
-        }
+        Handler().postDelayed({
+            (0..20).forEach {
+                list.add("$it")
+            }
+            rv_view.getBuilder().setData(list)
+        }, 2000)
 // result的类型在kotlin1.3中推断为String?，在Kotlin1.4中为String
         rv_view.getBuilder().setData(list)
         rv_view.getBuilder().setEmptyViewClick(R.id.tv_1, R.id.tv_2)

@@ -36,7 +36,13 @@ open class BaseRecyclerBuilder {
             else -> recyclerView.initGrid(type, adapter)
         }
         mRecyclerQuickOperation = RecyclerQuickOperation(mRecyclerView)
+
     }
+
+
+//    internal inline fun <reified A : RecyclerView.Adapter<*>> initQuickOperation() {
+//        val adapter = mRecyclerQuickOperation.getAdapter<A>()
+//    }
 
     /**
      * 设置数据
@@ -45,7 +51,8 @@ open class BaseRecyclerBuilder {
         listData.clear()
         listData.addAll(list)
         if (EmptyView.emptyViewShow && list.isNullOrEmpty() && mDisableEmptyView) {
-            setEmptyView()
+            setEmptyView(emptyViewBase)
+            emptyViewBase?.visibility = View.VISIBLE
         } else {
             dismissEmptyView()
         }
@@ -165,16 +172,17 @@ open class BaseRecyclerBuilder {
     /**
      * 设置空布局
      */
-    fun setEmptyView(viewBase: EmptyView = getEmptyView()) {
-        mRecyclerView.visibility = View.GONE
-        emptyViewBase = viewBase
-        viewBase.visibility = View.VISIBLE
-        var viewParent = mRecyclerView.parent
-        if (viewParent is ViewGroup) {
-            if (viewParent.indexOfChild(viewBase) == -1)
-                viewParent.addView(viewBase)
-        } else {
-            Log.e("RecyclerView", "默认空布局不可用,请手动设置")
+    fun setEmptyView(viewBase: EmptyView?) {
+        viewBase.apply {
+            mRecyclerView.visibility = View.GONE
+            emptyViewBase = viewBase
+            var viewParent = mRecyclerView.parent
+            if (viewParent is ViewGroup) {
+                if (viewParent.indexOfChild(viewBase) == -1)
+                    viewParent.addView(viewBase)
+            } else {
+                Log.e("RecyclerView", "默认空布局不可用,请手动设置")
+            }
         }
     }
 

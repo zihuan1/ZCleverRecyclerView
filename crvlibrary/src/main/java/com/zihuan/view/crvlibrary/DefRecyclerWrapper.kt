@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Zihuan
  */
 class DefRecyclerWrapper(private val recyclerView: RecyclerView) : BaseRecyclerWrapper<BaseRecyclerBuilder>() {
-    override fun createBuilder(adapter: RecyclerView.Adapter<*>, type: Int): BaseRecyclerBuilder {
+    override fun  createBuilder(adapter: RecyclerView.Adapter<*>, type: Int): BaseRecyclerBuilder {
         if (recyclerView.parent == null) {
             Log.e("DefRecyclerWrapper", "请先为RecyclerView设置根布局")
         }
-        return BaseRecyclerBuilder(adapter, type, recyclerView)
+        val baseRecyclerBuilder = BaseRecyclerBuilder(adapter, type, recyclerView)
+        return baseRecyclerBuilder
     }
 }
