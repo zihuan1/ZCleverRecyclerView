@@ -2,7 +2,7 @@ package com.zihuan.view.crvlibrary
 
 import androidx.recyclerview.widget.LinearLayoutManager
 
-interface RecyclerViewScrollListener {
+fun interface RecyclerViewScrollListener {
 
     /**
      * @param state 滚动状态

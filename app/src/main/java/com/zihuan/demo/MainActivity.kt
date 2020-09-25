@@ -24,25 +24,21 @@ class MainActivity : AppCompatActivity(),
         var list = ArrayList<String>()
         EmptyView.emptyLayout = R.layout.empty_layout
 //        多个rv可以分别设置
-        rv_view.getBuilder().setEmptyViewListener(EmptyViewListener { viewId, _ ->
+        rv_view.getBuilder().setEmptyViewListener { viewId, _ ->
             Log.e("点击1111", "viewid$viewId")
-        })
-
+        }
         (0..20).forEach {
             list.add("$it")
         }
-
+// result的类型在kotlin1.3中推断为String?，在Kotlin1.4中为String
         rv_view.getBuilder().setData(list)
         rv_view.getBuilder().setEmptyViewClick(R.id.tv_1, R.id.tv_2)
         bt_click.setOnClickListener {
             startActivity(Intent(this, Main2Activity::class.java))
         }
-        builder.addOnScrollListener(object : RecyclerViewScrollListener {
-            override fun onScrollStateChanged(state: Int, layoutManager: LinearLayoutManager, scrollX: Int, scrollY: Int) {
-                Log.e("addOnScrollListener 状态", "state$state scrollY$scrollY")
-
-            }
-        })
+        builder.addOnScrollListener { state, layoutManager, scrollX, scrollY ->
+            Log.e("addOnScrollListener 状态", "state$state scrollY$scrollY")
+        }
         bt_click_perform.setOnClickListener {
 //            Toast.makeText(this, "点击", Toast.LENGTH_LONG).show()
             rv_view.getBuilder().performItemClick(1)
