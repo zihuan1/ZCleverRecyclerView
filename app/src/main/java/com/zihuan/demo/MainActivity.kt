@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(),
         rv_view.getBuilder().setEmptyViewListener { viewId, _ ->
             Log.e("点击1111", "viewid$viewId")
         }
+        rv_view.getBuilder().addOnScrollListener { state, layoutManager, scrollX, scrollY -> }
         Handler().postDelayed({
             (0..20).forEach {
                 list.add("$it")

@@ -23,7 +23,6 @@
         android:layout_below="@+id/bt_click"
         android:text="模拟点击" />
 
-
     <Button
         android:id="@+id/bt_setdata"
         android:layout_width="wrap_content"

@@ -6,9 +6,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.zihuan.view.crvlibrary.BaseRecyclerBuilder
 
-class CompleteBuilder(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>, type: Int
-                      , private val refreshLayout: SmartRefreshLayout
-) : BaseRecyclerBuilder(adapter, type, recyclerView) {
+class CompleteBuilder(private val refreshLayout: SmartRefreshLayout) : BaseRecyclerBuilder() {
 
     /**
      * RecyclerView设置布局参数

@@ -17,32 +17,19 @@ import com.zihuan.view.crvlibrary.CleverConstants.SCROLL_STATE_STOP
  */
 open class BaseRecyclerBuilder {
 
-    private var mRecyclerView: RecyclerView
-    private var mZRecyclerData: RecyclerData
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mZRecyclerData: RecyclerData
     private var emptyViewBase: EmptyView? = null
     private var listData = ArrayList<Any>()
     private var mDisableEmptyView = true
-    private var mRecyclerQuickOperation: RecyclerQuickOperation
+    private lateinit var mRecyclerQuickOperation: RecyclerQuickOperation
 
-    constructor(adapter: RecyclerView.Adapter<*>, type: Int, recyclerView: RecyclerView) {
-        if (adapter is RecyclerData) {
-            mZRecyclerData = adapter
-        } else {
-            throw ClassCastException("没有实现数据刷新接口")
-        }
-        mRecyclerView = when (type) {
-            LinearLayoutManager.VERTICAL -> recyclerView.initVertical(adapter)
-            LinearLayoutManager.HORIZONTAL -> recyclerView.initHorizontal(adapter)
-            else -> recyclerView.initGrid(type, adapter)
-        }
+    internal fun setRecyclerParam(adapter: RecyclerData, recyclerView: RecyclerView) {
+        mZRecyclerData = adapter
+        mRecyclerView = recyclerView
         mRecyclerQuickOperation = RecyclerQuickOperation(mRecyclerView)
-
     }
 
-
-//    internal inline fun <reified A : RecyclerView.Adapter<*>> initQuickOperation() {
-//        val adapter = mRecyclerQuickOperation.getAdapter<A>()
-//    }
 
     /**
      * 设置数据
@@ -173,7 +160,7 @@ open class BaseRecyclerBuilder {
      * 设置空布局
      */
     fun setEmptyView(viewBase: EmptyView?) {
-        viewBase.apply {
+        viewBase?.apply {
             mRecyclerView.visibility = View.GONE
             emptyViewBase = viewBase
             var viewParent = mRecyclerView.parent

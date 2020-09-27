@@ -6,14 +6,13 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.zihuan.view.crvlibrary.BaseCleverRecycler
-import com.zihuan.view.crvlibrary.RecyclerQuickOperation
+import com.zihuan.view.crvlibrary.RecyclerViewWrapper
 
 /**
  * RecyclerView 模版类
  * @author Zihuan
  */
-class CompleteRecyclerView : BaseCleverRecycler<CompleteBuilder, CompleteWrapper> {
-
+class CompleteRecyclerView : BaseCleverRecycler<CompleteBuilder> {
 
     private lateinit var refreshLayout: SmartRefreshLayout
 
@@ -21,7 +20,7 @@ class CompleteRecyclerView : BaseCleverRecycler<CompleteBuilder, CompleteWrapper
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun createView() = RecyclerView(context).apply {
+    fun createView() = RecyclerView(context).apply {
         refreshLayout = SmartRefreshLayout(context)
 //       由于SmartRefreshLayout只能添加一个view,要想在没数据的时候显示emptyView,就得再嵌套一层布局
         var recyclerParent = FrameLayout(context)
@@ -31,6 +30,9 @@ class CompleteRecyclerView : BaseCleverRecycler<CompleteBuilder, CompleteWrapper
         this@CompleteRecyclerView.addView(refreshLayout)
     }
 
-    override fun createWrapper(recyclerView: RecyclerView) =
-        CompleteWrapper(recyclerView, refreshLayout)
+    override fun createWrapper(): RecyclerViewWrapper<CompleteBuilder> {
+        return RecyclerViewWrapper<CompleteBuilder>(createView()).apply { createBuilder<CompleteBuilder>() }
+    }
+
+
 }
