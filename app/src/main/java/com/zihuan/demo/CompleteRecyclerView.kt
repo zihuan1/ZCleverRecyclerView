@@ -20,7 +20,7 @@ class CompleteRecyclerView : BaseCleverRecycler<CompleteBuilder> {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    fun createView() = RecyclerView(context).apply {
+    private fun createView() = RecyclerView(context).apply {
         refreshLayout = SmartRefreshLayout(context)
 //       由于SmartRefreshLayout只能添加一个view,要想在没数据的时候显示emptyView,就得再嵌套一层布局
         var recyclerParent = FrameLayout(context)
@@ -30,8 +30,11 @@ class CompleteRecyclerView : BaseCleverRecycler<CompleteBuilder> {
         this@CompleteRecyclerView.addView(refreshLayout)
     }
 
-    override fun createWrapper(): RecyclerViewWrapper<CompleteBuilder> {
-        return RecyclerViewWrapper<CompleteBuilder>(createView()).apply { createBuilder<CompleteBuilder>() }
+
+    override fun bindRecycler() = createView()
+
+    override fun createBuilder(wrapper: RecyclerViewWrapper<CompleteBuilder>) {
+        wrapper.createBuilder<CompleteBuilder>(refreshLayout)
     }
 
 

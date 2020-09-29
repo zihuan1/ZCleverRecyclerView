@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.reflect.Type
 
 /**
  * RecyclerView 模版类
@@ -22,12 +23,15 @@ abstract class BaseCleverRecycler<B : BaseRecyclerBuilder> : FrameLayout {
         initWrapper()
     }
 
-    private lateinit var viewWrapper: RecyclerViewWrapper<B>
+    lateinit var viewWrapper: RecyclerViewWrapper<B>
 
-    abstract fun createWrapper(): RecyclerViewWrapper<B>
+    abstract fun bindRecycler(): RecyclerView
+
+    abstract fun createBuilder(wrapper: RecyclerViewWrapper<B>)
 
     private fun initWrapper() {
-        this.viewWrapper = createWrapper()
+        this.viewWrapper = RecyclerViewWrapper(bindRecycler())
+        createBuilder(viewWrapper)
     }
 
     /**
@@ -45,15 +49,13 @@ abstract class BaseCleverRecycler<B : BaseRecyclerBuilder> : FrameLayout {
      * 传一个Adapter泛型自动实例化,与上面的方法没有本质区别
      */
     inline fun <reified Adapter : RecyclerView.Adapter<*>> buildVerticalLayout(vararg parameters: Any) =
-            buildVerticalLayout(RecyclerAdapterFactory.createAdapter<Adapter>(*parameters))
+            viewWrapper.buildVerticalLayout<Adapter>(*parameters)
 
     inline fun <reified Adapter : RecyclerView.Adapter<*>> buildHorizontalLayout(vararg parameters: Any) =
-            buildHorizontalLayout(RecyclerAdapterFactory.createAdapter<Adapter>(*parameters))
+            viewWrapper.buildHorizontalLayout<Adapter>(*parameters)
 
-
-    inline fun <reified Adapter : RecyclerView.Adapter<*>> buildGridLayout(vararg parameters: Any, type: Int) =
-            buildGridLayout(RecyclerAdapterFactory.createAdapter<Adapter>(*parameters), type)
-
+    inline fun <reified Adapter : RecyclerView.Adapter<*>> buildGridLayout(type: Int, vararg parameters: Any) =
+            viewWrapper.buildGridLayout<Adapter>(type, *parameters)
 
     /**
      * 获取当前构建者

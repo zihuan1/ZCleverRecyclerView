@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
  * RecyclerView Adapter 工厂
  * @author Zihuan
  */
-object RecyclerAdapterFactory {
+object ClassFactory {
 
 
     /**
@@ -21,12 +21,12 @@ object RecyclerAdapterFactory {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     inline fun <reified Adapter : RecyclerView.Adapter<*>> createAdapter(vararg parameters: Any): Adapter {
-        return createT(*parameters)
+        return create(*parameters)
     }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    inline fun <reified T> createT(vararg parameters: Any): T {
+    inline fun <reified T> create(vararg parameters: Any): T {
 //        val paramTypes = parameters.map { it::class.java }.toTypedArray()
 //        val adapter = Adapter::class.java.getDeclaredConstructor(*paramTypes).newInstance(*parameters)
         //获取目标类构造列表
@@ -36,9 +36,8 @@ object RecyclerAdapterFactory {
             //将param数量与构造列表中的函数参数数量进行匹配
             if (it.parameterCount == parameters.size) {
                 //获取目标类运行时构造参数列表所需类型，以构造函数需要的类型为准
-                var paramTypes2 = it.parameters.map { mapIt -> mapIt.type }.toTypedArray()
-                adapter2 = T::class.java.getDeclaredConstructor(*paramTypes2)
-                        .newInstance(*parameters)
+                var constructorTypes = it.parameters.map { mapIt -> mapIt.type }.toTypedArray()
+                adapter2 = T::class.java.getDeclaredConstructor(*constructorTypes).newInstance(*parameters)
                 return@forEach
             }
         }

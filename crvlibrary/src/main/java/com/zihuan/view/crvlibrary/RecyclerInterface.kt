@@ -2,6 +2,7 @@ package com.zihuan.view.crvlibrary
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 /**
@@ -20,7 +21,12 @@ fun interface RecyclerViewScrollListener {
      * @param scrollX 横向滚动 正值向上滚动负值向下滚动
      * @param scrollY 竖向滚动 正直像左滚动负值向由滚动
      */
-    fun onScrollStateChanged(state: Int, layoutManager: LinearLayoutManager, scrollX: Int, scrollY: Int)
+    fun onScrollStateChanged(
+            state: Int,
+            layoutManager: LinearLayoutManager,
+            scrollX: Int,
+            scrollY: Int
+    )
 }
 
 fun interface EmptyViewListener {
@@ -29,4 +35,18 @@ fun interface EmptyViewListener {
      * @param view   当前view
      */
     fun onClick(viewId: Int, view: View?)
+}
+
+interface BuilderLayout<B: BaseRecyclerBuilder> {
+    fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>)
+    fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>)
+    fun buildGridLayout(adapter: RecyclerView.Adapter<*>, type: Int)
+}
+
+inline fun <B : BaseRecyclerBuilder> BuilderLayout<B>.buildGridLayout2(adapter: RecyclerView.Adapter<*>, type: Int){
+
+ }
+
+inline fun <reified T,B: BaseRecyclerBuilder> BuilderLayout<B>.buildVerticalLayout() {
+
 }

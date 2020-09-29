@@ -3,14 +3,13 @@ package com.zihuan.view.crvlibrary
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
 /***
  * RecyclerView 默认的包装类
  * @author Zihuan
  */
 class RecyclerViewWrapper<Builder : BaseRecyclerBuilder> {
 
-    lateinit var baseBuilder: Builder
+    var baseBuilder: Builder? = null
     private var recyclerView: RecyclerView
 
     constructor(recyclerView: RecyclerView) {
@@ -33,23 +32,24 @@ class RecyclerViewWrapper<Builder : BaseRecyclerBuilder> {
      * 传一个Adapter泛型自动实例化,与上面的方法没有本质区别
      */
     inline fun <reified Adapter : RecyclerView.Adapter<*>> buildVerticalLayout(vararg parameters: Any) =
-            buildVerticalLayout(RecyclerAdapterFactory.createAdapter<Adapter>(*parameters))
+            buildVerticalLayout(ClassFactory.createAdapter<Adapter>(*parameters))
 
     inline fun <reified Adapter : RecyclerView.Adapter<*>> buildHorizontalLayout(vararg parameters: Any) =
-            buildHorizontalLayout(RecyclerAdapterFactory.createAdapter<Adapter>(*parameters))
+            buildHorizontalLayout(ClassFactory.createAdapter<Adapter>(*parameters))
 
-
-    inline fun <reified Adapter : RecyclerView.Adapter<*>> buildGridLayout(vararg parameters: Any, type: Int) =
-            buildGridLayout(RecyclerAdapterFactory.createAdapter<Adapter>(*parameters), type)
+    inline fun <reified Adapter : RecyclerView.Adapter<*>> buildGridLayout(type: Int, vararg parameters: Any) =
+            buildGridLayout(ClassFactory.createAdapter<Adapter>(*parameters), type)
 
     private fun assembly(adapter: RecyclerView.Adapter<*>, type: Int): Builder {
+        //包装类调用
+        if (baseBuilder == null) createBuilder<BaseRecyclerBuilder>()
         setRecyclerParam(adapter, type)
-        return baseBuilder
+        return baseBuilder!!
     }
 
 
-    inline fun <reified Builder2> createBuilder() {
-        baseBuilder = RecyclerAdapterFactory.createT<Builder2>() as Builder
+    inline fun <reified Builder2> createBuilder(vararg parameters: Any) {
+        baseBuilder = ClassFactory.create<Builder2>(*parameters) as Builder
     }
 
     private fun setRecyclerParam(adapter: RecyclerView.Adapter<*>, type: Int) {
@@ -64,10 +64,11 @@ class RecyclerViewWrapper<Builder : BaseRecyclerBuilder> {
             LinearLayoutManager.HORIZONTAL -> recyclerView.initHorizontal(adapter)
             else -> recyclerView.initGrid(type, adapter)
         }
-        baseBuilder.setRecyclerParam(recyclerData, recyclerView)
+        baseBuilder?.setRecyclerParam(recyclerData, recyclerView)
     }
 
     fun getBuilder(): Builder {
-        return baseBuilder
+        return baseBuilder!!
     }
 }
+

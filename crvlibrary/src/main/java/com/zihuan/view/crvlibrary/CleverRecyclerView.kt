@@ -13,11 +13,12 @@ class CleverRecyclerView : BaseCleverRecycler<BaseRecyclerBuilder> {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun createWrapper(): RecyclerViewWrapper<BaseRecyclerBuilder> {
-        val view = RecyclerView(context).apply { this@CleverRecyclerView.addView(this) }
-        return RecyclerViewWrapper<BaseRecyclerBuilder>(view)
-                .apply { createBuilder<BaseRecyclerBuilder>() }
+    override fun bindRecycler(): RecyclerView {
+        return RecyclerView(context).apply { this@CleverRecyclerView.addView(this) }
+    }
 
+    override fun createBuilder(wrapper: RecyclerViewWrapper<BaseRecyclerBuilder>) {
+        wrapper.createBuilder<BaseRecyclerBuilder>()
     }
 
 
