@@ -36,10 +36,3 @@ fun interface EmptyViewListener {
      */
     fun onClick(viewId: Int, view: View?)
 }
-
-interface BuilderLayout<B : BaseRecyclerBuilder> {
-    fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>): B
-    fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>): B
-    fun buildGridLayout(adapter: RecyclerView.Adapter<*>, type: Int): B
-}
-
