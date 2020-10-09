@@ -22,10 +22,10 @@ fun interface RecyclerViewScrollListener {
      * @param scrollY 竖向滚动 正直像左滚动负值向由滚动
      */
     fun onScrollStateChanged(
-            state: Int,
-            layoutManager: LinearLayoutManager,
-            scrollX: Int,
-            scrollY: Int
+        state: Int,
+        layoutManager: LinearLayoutManager,
+        scrollX: Int,
+        scrollY: Int
     )
 }
 
@@ -37,16 +37,9 @@ fun interface EmptyViewListener {
     fun onClick(viewId: Int, view: View?)
 }
 
-interface BuilderLayout<B: BaseRecyclerBuilder> {
-    fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>)
-    fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>)
-    fun buildGridLayout(adapter: RecyclerView.Adapter<*>, type: Int)
+interface BuilderLayout<B : BaseRecyclerBuilder> {
+    fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>): B
+    fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>): B
+    fun buildGridLayout(adapter: RecyclerView.Adapter<*>, type: Int): B
 }
 
-inline fun <B : BaseRecyclerBuilder> BuilderLayout<B>.buildGridLayout2(adapter: RecyclerView.Adapter<*>, type: Int){
-
- }
-
-inline fun <reified T,B: BaseRecyclerBuilder> BuilderLayout<B>.buildVerticalLayout() {
-
-}

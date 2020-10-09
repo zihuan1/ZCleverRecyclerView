@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.reflect.Type
 
 /**
  * RecyclerView 模版类
@@ -61,6 +60,5 @@ abstract class BaseCleverRecycler<B : BaseRecyclerBuilder> : FrameLayout {
      * 获取当前构建者
      */
     fun getBuilder() = viewWrapper.getBuilder()
-
 
 }
