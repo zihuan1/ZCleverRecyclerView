@@ -1,4 +1,4 @@
-package com.zihuan.view.crvlibrary
+package com.zihuan.view.crvlibrary.test
 
 import android.util.Log
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.zihuan.view.crvlibrary.*
 import com.zihuan.view.crvlibrary.CleverConstants.SCROLL_STATE_SCROLLING
 import com.zihuan.view.crvlibrary.CleverConstants.SCROLL_STATE_START
 import com.zihuan.view.crvlibrary.CleverConstants.SCROLL_STATE_STOP
@@ -14,20 +15,14 @@ import com.zihuan.view.crvlibrary.CleverConstants.SCROLL_STATE_STOP
  * RecyclerView 构建者类
  * @author Zihuan
  */
-open class BaseRecyclerBuilder {
+open class BaseRecyclerBuilder2<A : RecyclerView.Adapter<*>> {
 
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mRecyclerData: RecyclerData
+    private lateinit var mZRecyclerData: RecyclerData
     private var emptyViewBase: EmptyView? = null
     private var listData = ArrayList<Any>()
     private var mDisableEmptyView = true
     private lateinit var mRecyclerQuickOperation: RecyclerQuickOperation
-
-    internal fun setRecyclerParam(adapter: RecyclerData, recyclerView: RecyclerView) {
-        mRecyclerData = adapter
-        mRecyclerView = recyclerView
-        mRecyclerQuickOperation = RecyclerQuickOperation(mRecyclerView)
-    }
 
 
     /**
@@ -42,7 +37,11 @@ open class BaseRecyclerBuilder {
         } else {
             dismissEmptyView()
         }
-        mRecyclerData.update(listData)
+        mZRecyclerData.update(listData)
+    }
+
+    fun getAdapter(): A {
+        return mRecyclerView.adapter as A
     }
 
     /**

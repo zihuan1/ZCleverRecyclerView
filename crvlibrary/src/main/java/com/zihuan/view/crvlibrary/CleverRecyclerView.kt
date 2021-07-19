@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Zihuan
  */
 class CleverRecyclerView : BaseCleverRecycler<BaseRecyclerBuilder> {
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    @JvmOverloads
+    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(context, attrs, defStyleAttr)
 
     override fun bindRecycler(): RecyclerView {
         return RecyclerView(context).apply { this@CleverRecyclerView.addView(this) }

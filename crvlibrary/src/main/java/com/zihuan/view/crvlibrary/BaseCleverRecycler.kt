@@ -10,15 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Zihuan
  */
 abstract class BaseCleverRecycler<B : BaseRecyclerBuilder> : FrameLayout {
-    constructor(context: Context) : super(context) {
-        initWrapper()
-    }
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        initWrapper()
-    }
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    @JvmOverloads
+    constructor(context: Context, attrs: AttributeSet?=null, defStyleAttr: Int=0) : super(context, attrs, defStyleAttr) {
         initWrapper()
     }
 

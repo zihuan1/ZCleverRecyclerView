@@ -22,7 +22,7 @@ class RecyclerViewWrapper<Builder : BaseRecyclerBuilder> {
      * @see buildVerticalLayout<Adapter>
      * 构造一个指定布局方向的RecyclerView
      */
-    fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>) = assembly(adapter, RECYCLER_VERTICAL)
+      fun buildVerticalLayout(adapter: RecyclerView.Adapter<*>) = assembly(adapter, RECYCLER_VERTICAL)
 
     fun buildHorizontalLayout(adapter: RecyclerView.Adapter<*>) = assembly(adapter, RECYCLER_HORIZONTAL)
 
